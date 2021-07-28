@@ -1,0 +1,43 @@
+<div class="col-md-8 offset-md-1 mt-5">
+    <div class="card">
+        <h4 class="card-header">Détail utilisateur : <strong>{{user.firstName}} {{user.lastName}}</strong></h4>
+        <table class="table table-striped">
+            <tbody *ngIf="user; else noUser">
+                <tr>
+                    <th class="col-md-3">Id interne</th>
+                    <td>{{user.id}}</td>
+                </tr>
+                <tr>
+                    <th>Pr&eacute;nom</th>
+                    <td>{{user.firstName}}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{user.lastName}}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <th>Actif ?</th>
+                    <td>
+                        <span *ngIf="user.active; else inactiveSpan" class="badge badge-success">Active</span>
+                        <ng-template #inactiveSpan>
+                            <span class="badge badge-secondary">Inactive</span>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Version (interne)</th>
+                    <td>{{user.version}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #noUser><span class="text-danger">Aucun utilisateur trouv&eacute;</span></ng-template>
+        <a [routerLink]="['/userlist']" routerLinkActive="router-link-active" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> Retour à la liste
+        </a>
+
+    </div>
+</div>

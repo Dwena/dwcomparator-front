@@ -1,0 +1,48 @@
+<div>
+    <div class="card">
+        <div class="card-header">Liste des utilisateurs</div>
+        <div class="card-body">
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                <div class="input-group">
+                    <input type="text" id="search-expression" formControlName="searchExpression" placeholder="Nom ou email" class="form-control" />
+                    <span class="input-group-prepend">
+						<button [disabled]="loading" class="btn btn-primary">
+							<i class="fa fa-search"></i> Rechercher
+						</button>
+					</span>
+                </div>
+            </form>
+            <a class="btn btn-info mr-2" (click)="onAddUser()"><i class="far fa-edit"></i> Ajouter</a>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="users; else noUsers">
+                    <tr *ngFor="let user of users | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+                        <td>{{user.firstName}} {{user.lastName}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <span *ngIf="user.active; else inactiveSpan" class="badge badge-success">Active</span>
+                            <ng-template #inactiveSpan>
+                                <span class="badge badge-secondary">Inactive</span>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <a href="#" [routerLink]="['/edit-user/', user.id]" class="btn btn-primary"><i class="far fa-edit"></i></a>
+                            <a href="#" [routerLink]="['/user-details/', user.id]" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-danger" (click)="onDeleteUser(user)"><i class="far fa-trash-alt"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <ng-template #noUsers><span class="text-danger">Aucun utilisateur trouv&eacute;</span></ng-template>
+            <pagination-controls *ngIf="users" (pageChange)="pageChanged($event)" previousLabel="Pr&eacute;c&eacute;dent" nextLabel="Suivant"></pagination-controls>
+        </div>
+    </div>
+</div>

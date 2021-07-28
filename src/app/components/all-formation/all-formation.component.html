@@ -1,0 +1,100 @@
+<div class="container col-10">
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <form [formGroup]="searchForm" (ngSubmit)="onSearchBySubmit()" class="form-group">
+                <input class="form-control" type="text" placeholder="Rechercher" formControlName="keyword" />
+                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">
+          Recherche
+        </button>
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#showDetails" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Afficher la recherche par details</a>
+          </p>
+          <div class="collapse multi-collapse" id="showDetails">
+            <div class="form-group">
+                <label for="contain">Référence</label>
+                <input class="form-control" type="text" formControlName="reference" />
+            </div>
+            <div class="form-group">
+                <label for="contain">Durée</label>
+                <input class="form-control" type="text" formControlName="duration" />
+            </div>
+            <div class="form-group">
+                <label for="contain">Audience</label>
+                <input class="form-control" type="text" formControlName="audience" />
+            </div>
+            <div class="form-group">
+                <label for="contain">Objectifs</label>
+                <input class="form-control" type="text" formControlName="audience" />
+            </div>
+            <div class="form-group">
+                <label for="contain">Prix (min)</label>
+                <input class="form-control col-md-4" type="text" formControlName="price_min" />
+            </div>
+            <div class="form-group">
+                <label for="contain">Prix (max)</label>
+                <input class="form-control col-md-4" type="text" formControlName="price_max" />
+            </div>
+            <div class="form-group">
+                <label for="filter">Centre de formation</label>
+                <select class="form-control" formControlName="trainingcenter">
+                <option value="0" selected>-- sélectionner un centre</option>
+                <option *ngFor="let center of centers" value="{{center.id}}">{{center.name}}</option>
+            </select>
+            </div>
+        <button [disabled]="loading" type="submit" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <i class="fas fa-search"></i>
+        </button>
+          </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div *ngFor="let formation of allFormation | async" class="col-sm-12 col-lg-3">
+            <div class="card" style="height: 100mm; width: 100mm;">
+                <div class="card-body d-flex flex-column">
+                    <p>{{ formation.crawler.trainingCenter.name}}</p>
+                    <h5 class="card-title">{{ formation.title }}</h5>
+                    <p class="card-text">{{ formation.price }} €</p>
+                    <p>{{ formation.duration }}</p>
+                    <button href="" [routerLink]="['indexedpage/details/', formation.id]" type="button" class=" btn btn-primary" >Détails</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" (click)="first()" [style]="getDisabledPrev()"><span class="page-link">First Page</span></li>
+                <li class="page-item" (click)="previous()">
+                    <!-- Si la page courante < 1 => masqué -->
+                    <span class="page-link" aria-label="Previous" [style]="getDisabledPrev()">
+            &laquo;
+          </span>
+                    <!-- Sinon => affichage boutton precedent -->
+                    <!-- <ng-template #displayPrev>
+            <span class="page-link">&laquo;</span>
+          </ng-template> -->
+                </li>
+                <li class="page-item active">
+                    <span class="page-link current-page">
+            <!-- Page courante: commence à 0 => +1 pour afficher la page 1 -->
+            {{currentPage+1}}
+          </span>
+                </li>
+                <li class="page-item" (click)="next()">
+                    <!-- Si page courante == total item => masqué -->
+                    <span class="page-link" aria-label="Next" [style]="getDisabledNext()">&raquo;</span>
+                    <!-- Sinon => affichage boutton suivant -->
+                    <!-- <ng-template #displayNext>
+            <span class="page-link">&raquo;</span>
+          </ng-template> -->
+                </li>
+            </ul>
+        </nav>
+
+
+    </div>
+</div>

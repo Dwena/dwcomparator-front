@@ -1,0 +1,43 @@
+<div>
+    <div class="card">
+        <div class="card-header">Liste des Pages indexées</div>
+        <div class="card-body">
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                <div class="input-group">
+                    <input type="text" id="search-expression" formControlName="searchExpression" placeholder="Titre, prix ou durée" class="form-control" />
+                    <span class="input-group-prepend">
+						<button [disabled]="loading" class="btn btn-primary">
+							<i class="fa fa-search"></i> Rechercher
+						</button>
+					</span>
+                </div>
+            </form>
+            <!-- <a class="btn btn-info mr-2" (click)="onAddIp()"><i class="far fa-edit"></i> Ajouter</a> -->
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Référence</th>
+                        <th>Titre</th>
+                        <th>Durée</th>
+                        <th>Prix</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ip of indexedPages | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+                        <th>{{ip.reference}}</th>
+                        <th>{{ip.title}}</th>
+                        <th>{{ip.duration}}</th>
+                        <th>{{ip.price}}</th>
+                        <td>
+                            <a href="#" [routerLink]="['details/', ip.id]" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-danger" (click)="onDeleteIp(ip)"><i class="far fa-trash-alt"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls *ngIf="indexedPages" (pageChange)="pageChanged($event)" previousLabel="Pr&eacute;c&eacute;dent" nextLabel="Suivant"></pagination-controls>
+        </div>
+    </div>
+</div>

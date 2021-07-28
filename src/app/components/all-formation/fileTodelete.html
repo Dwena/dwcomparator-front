@@ -1,0 +1,106 @@
+<div class="container col-10">
+    <div class="row">
+        <form class="card-body" [formGroup]="searchForm" (ngSubmit)="onSearchBySubmit()">
+            <div class="input-group" id="adv-search">
+                <input type="text" formControlName="keyword" class="form-control" placeholder="Rechercher une formation" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <div class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="contain">Référence</label>
+                                        <input class="form-control" type="text" formControlName="reference" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Durée</label>
+                                        <input class="form-control" type="text" formControlName="duration" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Audience</label>
+                                        <input class="form-control" type="text" formControlName="audience" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Objectifs</label>
+                                        <input class="form-control" type="text" formControlName="audience" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Prix (min)</label>
+                                        <input class="form-control col-md-4" type="text" formControlName="price_min" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Prix (max)</label>
+                                        <input class="form-control col-md-4" type="text" formControlName="price_max" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filter">Centre de formation</label>
+                                        <select class="form-control" formControlName="trainingcenter">
+                                        <option value="0" selected>-- sélectionner un centre</option>
+                                        <option *ngFor="let center of centers" value="{{center.id}}">{{center.name}}</option>
+                                    </select>
+                                    </div>
+                                    <button [disabled]="loading" type="submit" class="btn btn-primary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button [disabled]="loading" type="submit" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div *ngFor="let formation of allFormation | async" class="col-sm-12 col-lg-3">
+            <div class="card" style="height: 100mm; width: 100mm;">
+                <div class="card-body d-flex flex-column">
+                    <p>{{ formation.crawler.trainingCenter.name}}</p>
+                    <h5 class="card-title">{{ formation.title }}</h5>
+                    <p class="card-text">{{ formation.price }} €</p>
+                    <p>{{ formation.duration }}</p>
+                    <button href="" [routerLink]="['indexedpage/details/', formation.id]" type="button" class=" btn btn-primary" >Détails</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" (click)="first()" [style]="getDisabledPrev()"><span class="page-link">First Page</span></li>
+                <li class="page-item" (click)="previous()">
+                    <!-- Si la page courante < 1 => masqué -->
+                    <span class="page-link" aria-label="Previous" [style]="getDisabledPrev()">
+            &laquo;
+          </span>
+                    <!-- Sinon => affichage boutton precedent -->
+                    <!-- <ng-template #displayPrev>
+            <span class="page-link">&laquo;</span>
+          </ng-template> -->
+                </li>
+                <li class="page-item active">
+                    <span class="page-link current-page">
+            <!-- Page courante: commence à 0 => +1 pour afficher la page 1 -->
+            {{currentPage+1}}
+          </span>
+                </li>
+                <li class="page-item" (click)="next()">
+                    <!-- Si page courante == total item => masqué -->
+                    <span class="page-link" aria-label="Next" [style]="getDisabledNext()">&raquo;</span>
+                    <!-- Sinon => affichage boutton suivant -->
+                    <!-- <ng-template #displayNext>
+            <span class="page-link">&raquo;</span>
+          </ng-template> -->
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

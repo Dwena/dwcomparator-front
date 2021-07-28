@@ -1,0 +1,14 @@
+.error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+
+.section-signup {
+    padding-top: 0vh;
+}
+.section {
+  padding: 0px;
+}
+  

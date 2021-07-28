@@ -1,0 +1,652 @@
+<div class="container text-black">
+  <div class="card col-lg-11 col-md-11">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onEditUrlToCrawl()"
+      class="form"
+      *ngIf="urlToCrawl"
+    >
+      <div class="card-header text-center">
+        <h4 class="card-title title-up font-weight-bold">Edit Url to crawl</h4>
+      </div>
+      <div class="card-body">
+        <div>
+          <label for="Fullurl" class="font-weight-bold">Fullurl *</label>
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="fullUrl"
+              required
+              [(ngModel)]="urlToCrawl.fullUrl"
+              name="fullUrl"
+              placeholder=""
+              formControlName="fullUrlField"
+              [ngClass]="{ 'is-invalid': submitted && f.fullUrlField.errors }"
+            />
+            <div
+              *ngIf="submitted && f.fullUrlField.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.fullUrlField.errors.required">
+                Réponse obligatoire !
+              </div>
+            </div>
+          </div>
+          <label for="url" class="font-weight-bold">url *</label>
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="url"
+              required
+              [(ngModel)]="urlToCrawl.url"
+              name="url"
+              placeholder="url"
+              formControlName="urlField"
+            />
+          </div>
+          <p class="font-weight-bold">newUrl *</p>
+          <div class="input-group no-border">
+            <label for="newUrlTrue" class="font-weight-bold">True</label>
+
+            <input
+              type="radio"
+              class="form-control"
+              id="newUrlTrue"
+              required
+              name="newUrlField"
+              placeholder=""
+              value="{{ true }}"
+              formControlName="newUrlField"
+            />
+
+            <div class="input-group no-border">
+              <label for="newUrlFalse" class="font-weight-bold">False</label>
+
+              <input
+                type="radio"
+                class="form-control"
+                id="newUrlFalse"
+                required
+                name="newUrlField"
+                placeholder=""
+                value="{{ false }}"
+                formControlName="newUrlField"
+                [ngClass]="{ 'is-invalid': submitted && f.fullUrlField.errors }"
+              />
+            </div>
+            <div
+              *ngIf="submitted && f.newUrlField.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.newUrlField.errors.required">
+                Réponse obligatoire !
+              </div>
+            </div>
+            <div>
+              <label for="trainingCenter" class="font-weight-bold"
+                >Training Center *</label
+              >
+
+              <select
+                id="trainingCenter"
+                formControlName="trainingCenterField"
+                [ngClass]="{ 'is-invalid': submitted && f.fullUrlField.errors }"
+              >
+                <option [ngValue]="null" disabled>
+                  {{ urlToCrawl.trainingCenter.name }}
+                </option>
+                <option *ngFor="let lst of trainingCenterLst" [value]="lst.id">
+                  {{ lst.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.trainingCenterField.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.trainingCenterField.required">
+                  Réponse obligatoire !
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <label for="preActions" class="font-weight-bold">preActions</label>
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="preActions"
+              required
+              [(ngModel)]="urlToCrawl.preActions"
+              name="preActions"
+              placeholder=""
+              formControlName="preActionsField"
+            />
+          </div>
+          <label
+            for="preSessionsActionspreSessionsActions"
+            class="font-weight-bold"
+            >preSessionsActions</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="preSessionsActions"
+              required
+              [(ngModel)]="urlToCrawl.fullUrl"
+              name="preSessionsActions"
+              placeholder=""
+              formControlName="preSessionsActionsField"
+            />
+          </div>
+          <label for="subLevelNumber" class="font-weight-bold"
+            >subLevelNumber</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="subLevelNumber"
+              required
+              [(ngModel)]="urlToCrawl.subLevelNumber"
+              name="subLevelNumber"
+              placeholder="subLevelNumber"
+              formControlName="subLevelNumberField"
+            />
+          </div>
+          <label for="searchExpressionByLevel" class="font-weight-bold"
+            >searchExpressionByLevel</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="searchExpressionByLevel"
+              required
+              [(ngModel)]="urlToCrawl.searchExpressionByLevel"
+              name="searchExpressionByLevel"
+              placeholder=""
+              formControlName="searchExpressionByLevelField"
+            />
+            <!-- <input
+              type="text"
+              class="form-control"
+              id="searchExpressionByLevel"
+              required
+              *ngFor="let expression of urlToCrawl.searchExpressionByLevel"
+              [(ngModel)]="expression"
+              name="searchExpressionByLevel"
+              placeholder=""
+              formControlName="searchExpressionByLevelField"
+            /> -->
+          </div>
+          <label for="referenceSearchExpression" class="font-weight-bold"
+            >referenceSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="referenceSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.referenceSearchExpression"
+              name="referenceSearchExpression"
+              placeholder=""
+              formControlName="referenceSearchExpressionField"
+            />
+          </div>
+          <label for="titleSearchExpression" class="font-weight-bold"
+            >titleSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="titleSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.titleSearchExpression"
+              name="titleSearchExpression"
+              placeholder=""
+              formControlName="titleSearchExpressionField"
+            />
+          </div>
+          <label for="durationSearchExpression" class="font-weight-bold"
+            >durationSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="durationSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.durationSearchExpression"
+              name="durationSearchExpression"
+              placeholder="durationSearchExpression"
+              formControlName="durationSearchExpressionField"
+            />
+          </div>
+          <label for="priceSearchExpression" class="font-weight-bold"
+            >priceSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="priceSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.priceSearchExpression"
+              name="priceSearchExpression"
+              placeholder=""
+              formControlName="priceSearchExpressionField"
+            />
+          </div>
+          <label for="referenceReplaceExpression" class="font-weight-bold"
+            >referenceReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="referenceReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.referenceReplaceExpression"
+              name="referenceReplaceExpression"
+              placeholder=""
+              formControlName="referenceReplaceExpressionField"
+            />
+          </div>
+          <label for="titleReplaceExpression" class="font-weight-bold"
+            >titleReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="titleReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.titleReplaceExpression"
+              name="titleReplaceExpression"
+              placeholder=""
+              formControlName="titleReplaceExpressionField"
+            />
+          </div>
+          <label for="durationReplaceExpression" class="font-weight-bold"
+            >durationReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="durationReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.durationReplaceExpression"
+              name="durationReplaceExpression"
+              placeholder="durationReplaceExpression"
+              formControlName="durationReplaceExpressionField"
+            />
+          </div>
+          <label for="priceReplaceExpression" class="font-weight-bold"
+            >priceReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="priceReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.priceReplaceExpression"
+              name="priceReplaceExpression"
+              placeholder=""
+              formControlName="priceReplaceExpressionField"
+            />
+          </div>
+          <label for="trainingProgramSearchExpression" class="font-weight-bold"
+            >trainingProgramSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="trainingProgramSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.trainingProgramSearchExpression"
+              name="trainingProgramSearchExpression"
+              placeholder=""
+              formControlName="trainingProgramSearchExpressionField"
+            />
+          </div>
+          <label for="objectivesSearchExpression" class="font-weight-bold"
+            >objectivesSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="objectivesSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.objectivesSearchExpression"
+              name="objectivesSearchExpression"
+              placeholder=""
+              formControlName="objectivesSearchExpressionField"
+            />
+          </div>
+          <label for="prerequisitesSearchExpression" class="font-weight-bold"
+            >prerequisitesSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="prerequisitesSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.prerequisitesSearchExpression"
+              name="prerequisitesSearchExpression"
+              placeholder=""
+              formControlName="prerequisitesSearchExpressionField"
+            />
+          </div>
+          <label for="audienceSearchExpression" class="font-weight-bold"
+            >audienceSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="audienceSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.audienceSearchExpression"
+              name="audienceSearchExpression"
+              placeholder=""
+              formControlName="audienceSearchExpressionField"
+            />
+          </div>
+          <label for="certificationSearchExpression" class="font-weight-bold"
+            >certificationSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="certificationSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.certificationSearchExpression"
+              name="certificationSearchExpression"
+              placeholder=""
+              formControlName="certificationSearchExpressionField"
+            />
+          </div>
+          <label for="eligibleForCPFSearchExpression" class="font-weight-bold"
+            >eligibleForCPFSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="eligibleForCPFSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.eligibleForCPFSearchExpression"
+              name="eligibleForCPFSearchExpression"
+              placeholder=""
+              formControlName="eligibleForCPFSearchExpressionField"
+            />
+          </div>
+          <label for="trainingProgramReplaceExpression" class="font-weight-bold"
+            >trainingProgramReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="trainingProgramReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.trainingProgramReplaceExpression"
+              name="trainingProgramReplaceExpression"
+              placeholder=""
+              formControlName="trainingProgramReplaceExpressionField"
+            />
+          </div>
+          <label for="objectivesReplaceExpression" class="font-weight-bold"
+            >objectivesReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="objectivesReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.objectivesReplaceExpression"
+              name="objectivesReplaceExpression"
+              placeholder=""
+              formControlName="objectivesReplaceExpressionField"
+            />
+          </div>
+          <label for="prerequisitesReplaceExpression" class="font-weight-bold"
+            >prerequisitesReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="prerequisitesReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.prerequisitesReplaceExpression"
+              name="prerequisitesReplaceExpression"
+              placeholder=""
+              formControlName="prerequisitesReplaceExpressionField"
+            />
+          </div>
+          <label for="audienceReplaceExpression" class="font-weight-bold"
+            >audienceReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="audienceReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.audienceReplaceExpression"
+              name="audienceReplaceExpression"
+              placeholder=""
+              formControlName="audienceReplaceExpressionField"
+            />
+          </div>
+          <label for="certificationReplaceExpression" class="font-weight-bold"
+            >certificationReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="certificationReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.certificationReplaceExpression"
+              name="certificationReplaceExpression"
+              placeholder=""
+              formControlName="certificationReplaceExpressionField"
+            />
+          </div>
+          <label for="eligibleForCPFReplaceExpression" class="font-weight-bold"
+            >eligibleForCPFReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="eligibleForCPFReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.eligibleForCPFReplaceExpression"
+              name="eligibleForCPFReplaceExpression"
+              placeholder=""
+              formControlName="eligibleForCPFReplaceExpressionField"
+            />
+          </div>
+          <label for="startDateSearchExpression" class="font-weight-bold"
+            >startDateSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="startDateSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.startDateSearchExpression"
+              name="startDateSearchExpression"
+              placeholder=""
+              formControlName="startDateSearchExpressionField"
+            />
+          </div>
+          <label for="endDateSearchExpression" class="font-weight-bold"
+            >endDateSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="endDateSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.endDateSearchExpression"
+              name="endDateSearchExpression"
+              placeholder=""
+              formControlName="endDateSearchExpressionField"
+            />
+          </div>
+          <label for="subscriptionUrlReplaceExpression" class="font-weight-bold"
+            >subscriptionUrlReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="subscriptionUrlReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.subscriptionUrlReplaceExpression"
+              name="subscriptionUrlReplaceExpression"
+              placeholder=""
+              formControlName="subscriptionUrlReplaceExpressionField"
+            />
+          </div>
+          <label for="subscriptionUrlSearchExpression" class="font-weight-bold"
+            >subscriptionUrlSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="subscriptionUrlSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.subscriptionUrlSearchExpression"
+              name="subscriptionUrlSearchExpression"
+              placeholder=""
+              formControlName="subscriptionUrlSearchExpressionField"
+            />
+          </div>
+          <label for="sessionsReplaceExpression" class="font-weight-bold"
+            >sessionsReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="sessionsReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.sessionsReplaceExpression"
+              name="sessionsReplaceExpression"
+              placeholder=""
+              formControlName="sessionsReplaceExpressionField"
+            />
+          </div>
+          <label for="startDateReplaceExpression" class="font-weight-bold"
+            >startDateReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="startDateReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.startDateReplaceExpression"
+              name="startDateReplaceExpression"
+              placeholder=""
+              formControlName="startDateReplaceExpressionField"
+            />
+          </div>
+          <label for="locationSearchExpression" class="font-weight-bold"
+            >locationSearchExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="locationSearchExpression"
+              required
+              [(ngModel)]="urlToCrawl.locationSearchExpression"
+              name="locationSearchExpression"
+              placeholder=""
+              formControlName="locationSearchExpressionField"
+            />
+          </div>
+          <label for="endDateReplaceExpression" class="font-weight-bold"
+            >endDateReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="endDateReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.endDateReplaceExpression"
+              name="endDateReplaceExpression"
+              placeholder=""
+              formControlName="endDateReplaceExpressionField"
+            />
+          </div>
+          <label for="subscriptionUrlReplaceExpression" class="font-weight-bold"
+            >locationReplaceExpression</label
+          >
+          <div class="input-group no-border">
+            <input
+              type="text"
+              class="form-control"
+              id="locationReplaceExpression"
+              required
+              [(ngModel)]="urlToCrawl.locationReplaceExpression"
+              name="locationReplaceExpression"
+              placeholder=""
+              formControlName="locationReplaceExpressionField"
+            />
+          </div>
+
+          <!--<p class="text-black" *ngIf="controlid() as message">
+            {{ message }}
+          </p>
+          -->
+
+          <!-- <div class="card-footer text-center">
+          <button type="submit" class="btn btn-neutral btn-round btn-lg">
+            Ajouter
+          </button>
+        </div>
+      </div> -->
+
+          <div>
+            <button type="submit" class="btn btn-success">Edit</button>
+          </div>
+          <a
+            [routerLink]="['/listUrlToCrawl']"
+            routerLinkActive="router-link-active"
+            class="btn btn-primary"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span
+            >Retour à la liste</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

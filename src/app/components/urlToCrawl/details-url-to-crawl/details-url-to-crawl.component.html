@@ -1,0 +1,165 @@
+<div class="col-md-8 offset-md-2">
+  <div class="card">
+    <h4 class="card-header">Détail l'url à crawl :</h4>
+    <table class="table table-striped">
+      <tbody *ngIf="urlToCrawl; else noTc">
+        <tr>
+          <th class="col-md-3">Id interne</th>
+          <td>{{ urlToCrawl.id }}</td>
+        </tr>
+        <tr>
+          <th>Url de base</th>
+          <td>{{ urlToCrawl.url }}</td>
+        </tr>
+        <tr>
+          <th>Full url</th>
+          <td>{{ urlToCrawl.fullUrl }}</td>
+        </tr>
+        <tr>
+          <th>preActions</th>
+          <td>{{ urlToCrawl.preActions }}</td>
+        </tr>
+        <tr>
+          <th>preSessionsActions</th>
+          <td>{{ urlToCrawl.preSessionsActions }}</td>
+        </tr>
+        <tr>
+          <th>subLevelNumber</th>
+          <td>{{ urlToCrawl.subLevelNumber }}</td>
+        </tr>
+        <tr>
+          <th>searchExpressionByLevel</th>
+          <td>{{ urlToCrawl.searchExpressionByLevel }}</td>
+        </tr>
+        <tr>
+          <th>referenceSearchExpression</th>
+          <td>{{ urlToCrawl.referenceSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>titleSearchExpression</th>
+          <td>{{ urlToCrawl.titleSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>durationSearchExpression</th>
+          <td>{{ urlToCrawl.durationSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>priceSearchExpression</th>
+          <td>{{ urlToCrawl.priceSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>referenceReplaceExpression</th>
+          <td>{{ urlToCrawl.referenceReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>titleReplaceExpression</th>
+          <td>{{ urlToCrawl.titleReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>durationReplaceExpression</th>
+          <td>{{ urlToCrawl.durationReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>priceReplaceExpression</th>
+          <td>{{ urlToCrawl.priceReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>trainingProgramSearchExpression</th>
+          <td>{{ urlToCrawl.trainingProgramSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>objectivesSearchExpression</th>
+          <td>{{ urlToCrawl.objectivesSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>prerequisitesSearchExpression</th>
+          <td>{{ urlToCrawl.prerequisitesSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>audienceSearchExpression</th>
+          <td>{{ urlToCrawl.audienceSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>certificationSearchExpression</th>
+          <td>{{ urlToCrawl.certificationSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>eligibleForCPFSearchExpression</th>
+          <td>{{ urlToCrawl.eligibleForCPFSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>trainingProgramReplaceExpression</th>
+          <td>{{ urlToCrawl.trainingProgramReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>objectivesReplaceExpression</th>
+          <td>{{ urlToCrawl.objectivesReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>prerequisitesReplaceExpression</th>
+          <td>{{ urlToCrawl.prerequisitesReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>audienceReplaceExpression</th>
+          <td>{{ urlToCrawl.audienceReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>certificationReplaceExpression</th>
+          <td>{{ urlToCrawl.certificationReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>eligibleForCPFReplaceExpression</th>
+          <td>{{ urlToCrawl.eligibleForCPFReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>startDateSearchExpression</th>
+          <td>{{ urlToCrawl.startDateSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>endDateSearchExpression</th>
+          <td>{{ urlToCrawl.endDateSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>subscriptionUrlReplaceExpression</th>
+          <td>{{ urlToCrawl.subscriptionUrlReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>subscriptionUrlSearchExpression</th>
+          <td>{{ urlToCrawl.subscriptionUrlSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>sessionsReplaceExpression</th>
+          <td>{{ urlToCrawl.sessionsReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>startDateReplaceExpression</th>
+          <td>{{ urlToCrawl.startDateReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>locationSearchExpression</th>
+          <td>{{ urlToCrawl.locationSearchExpression }}</td>
+        </tr>
+        <tr>
+          <th>endDateReplaceExpression</th>
+          <td>{{ urlToCrawl.endDateReplaceExpression }}</td>
+        </tr>
+        <tr>
+          <th>locationReplaceExpression</th>
+          <td>{{ urlToCrawl.locationReplaceExpression }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noTc
+      ><span class="text-danger"
+        >Aucun centre de formation trouv&eacute;</span
+      ></ng-template
+    >
+    <a (click)="goBack()" class="btn btn-primary">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Retour à la liste
+    </a>
+  </div>
+</div>

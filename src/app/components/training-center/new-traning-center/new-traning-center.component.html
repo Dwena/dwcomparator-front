@@ -1,0 +1,84 @@
+<section id="create-traingcenter">
+    <div class="container-fluid mt-5 col-lg-6">
+            <div class="card card-default">
+                <div class="card-header"><h3><i class="fas fa-university"></i> Créer un centre de formation</h3></div>
+                <div class="card-body">
+                    <form [formGroup]="trainingCenterForm" (ngSubmit)="onSaveTrainingCenter()">
+                        <div class="form-group">
+                            <label for="name" class="control-label font-weight-bold">Nom du centre de formation *</label>
+                            <input formControlName="name" class="form-control" type="text" name="name" required >
+                            <div *ngIf="submitted && getControl.name.errors" class="text-danger">
+                                <div *ngIf="getControl.name.errors.required">Le nom est obligatoire.</div>
+                                <div *ngIf="getControl.name.errors.minlength">Le nom doit contenir au moins 3 caractères. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="baseSiteUrl" class="control-label font-weight-bold">URL Site par défaut *</label>
+                            <input formControlName="baseSiteUrl" class="form-control" type="text" name="baseSiteUrl" required>
+                            <div *ngIf="submitted && getControl.baseSiteUrl.errors" class="text-danger">
+                                <div *ngIf="getControl.baseSiteUrl.errors.required">L'url du site est obligatoire.</div>
+                                <div *ngIf="getControl.name.errors.minlength">L'url du site doit contenir au moins 3 caractères. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchUrl" class="control-label font-weight-bold">URL de recherche *</label>
+                            <input formControlName="searchUrl" class="form-control" type="text" name="searchUrl" required>
+                            <div *ngIf="submitted && getControl.searchUrl.errors" class="text-danger">
+                                <div *ngIf="getControl.searchUrl.errors.required">L'url de recherche est obligatoire.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchFormMethod" class="control-label font-weight-bold">Méthode de recherche *</label>
+                            <br>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                <input formControlName="searchFormMethod" type="radio" class="form-check-input" value="GET" name="searchFormMethod" required >GET
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                <input formControlName="searchFormMethod" type="radio" class="form-check-input" value="POST" name="searchFormMethod" required >POST
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && getControl.searchFormMethod.errors" class="text-danger">
+                                <div *ngIf="getControl.searchFormMethod.errors.required">La méthode de recherche est obligatoire.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchParameters" class="control-label font-weight-bold">Parametre de recherche *</label>
+                            <input formControlName="searchParameters" class="form-control" type="text" name="searchParameters" required>
+                            <div *ngIf=" submitted && getControl.searchParameters.errors" class="text-danger">
+                                <div *ngIf="getControl.searchParameters.errors.required">Le parametre de recherche est obligatoire.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="indexingFrequency" class="control-label font-weight-bold">Fréquence d'indexation <small>(jour)</small> *</label>
+                            <input formControlName="indexingFrequency" class="form-control" type="number" name="indexingFrequency" required pattern="^[0-9]+?" required>
+                            <div *ngIf=" submitted && getControl.indexingFrequency.errors" class="text-danger">
+                                <div *ngIf="getControl.indexingFrequency.errors.required">La fréquence d'indexation  est obligatoire.</div>
+                                <div *ngIf="getControl.indexingFrequency.errors.pattern">La fréquence d'indexation doit être compris entre 1 jours et 365 jours</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pricesIncludingTaxes" class="control-label font-weight-bold">Prix *</label>
+                            <br>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input formControlName="pricesIncludingTaxes" type="radio" class="form-check-input" value="true" name="pricesIncludingTaxes" required>TTC <small>(toute taxe comprise)</small>
+                                </label>
+                            </div>
+                            <div class="form-check-inline"> 
+                                <label class="form-check-label">
+                                    <input formControlName="pricesIncludingTaxes" type="radio" class="form-check-input" value="false" name="pricesIncludingTaxes" required>HT<small>(hors taxe)</small>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && getControl.pricesIncludingTaxes.errors" class="text-danger">
+                                <div *ngIf="getControl.pricesIncludingTaxes.errors.required">La méthode est obligatoire.</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" >Sauvegarder</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+</section>

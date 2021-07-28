@@ -1,0 +1,57 @@
+<section id="crawler">
+    <div class="container-fluid mt-5">
+        <div class="card card-default">
+            <div class="card-header"><h3><i class="far fa-folder-open"></i> Historique des crawlers</h3> </div>
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="col-md-8">
+                        <div class="input-group mb-2">
+                            <input type="text" id="search-expression"
+                                formControlName="searchExpression" placeholder="Saisir un centre de formation" class="form-control" />
+                                <span class="input-group-prepend">
+                                <button [disabled]="loading" class="btn btn-primary">
+                                    <i class="fa fa-search"></i> Rechercher
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <form [formGroup]="formNbLigne" class="col-md-2 ">
+                        <select formControlName="nbLigneSelect" (change)="onGetCrawler()" class="custom-select">
+                            <option *ngFor="let nbLigne of nbLignes" [ngValue]="nbLigne"> {{ nbLigne.valeur }} </option>
+                        </select>
+                    </form>
+                </div>
+
+                <table class="table table-bordered table-striped table-hover" >
+                    <thead class="thead-dark" title="Cliquer pour trier.">
+                        <tr>
+                            <th (click)="triPar('id')">ID</th>
+                            <th (click)="triPar('startDate')">Date de début</th>
+                            <th (click)="triPar('endDate')">Date de fin</th>
+                            <th (click)="triPar('indexedPages')">Nombre de page indexée</th>
+                            <th (click)="triPar('errorLog')">Erreur log</th>
+                            <th (click)="triPar('trainingCenter.name')">Centre de formation</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="crawler; else nocrawler">
+                        <tr *ngFor="let c of crawler | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+                            <td>{{c.id}}</td>
+                            <td>{{c.startDate | date: 'dd/MM/YYYY hh:mm:ss'}}</td>
+                            <td>{{c.endDate | date: 'dd/MM/YYYY hh:mm:ss'}}</td>
+                            <td>{{c.indexedPages}}</td>
+                            <td>{{c.errorLog}}</td>
+                            <td>{{c.trainingCenter.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ng-template #nocrawler><span class="text-danger">Aucun historique de crawl</span></ng-template>
+                <pagination-controls 
+				*ngIf="crawler" 
+				(pageChange)="pageChanged($event)" 
+				previousLabel="Pr&eacute;c&eacute;dent"
+				nextLabel="Suivant"></pagination-controls>
+
+            </div>
+        </div>
+    </div>
+</section>

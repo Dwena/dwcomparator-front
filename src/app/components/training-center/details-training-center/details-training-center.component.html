@@ -1,0 +1,96 @@
+<div class="col-md-8 offset-md-2">
+    <div class="card">
+        <h4 class="card-header">
+            Détail centre de formation : <strong>{{ trainingCenter.name }}</strong>
+        </h4>
+        <table class="table table-striped">
+            <tbody *ngIf="trainingCenter; else noTc">
+                <tr>
+                    <th class="col-md-3">Id interne</th>
+                    <td>{{ trainingCenter.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ trainingCenter.name }}</td>
+                </tr>
+                <tr>
+                    <th>Url de base</th>
+                    <td>{{ trainingCenter.baseSiteUrl }}</td>
+                </tr>
+                <tr>
+                    <th>Url de recherche</th>
+                    <td>{{ trainingCenter.searchUrl }}</td>
+                </tr>
+                <tr>
+                    <th>Url de recherche</th>
+                    <td>{{ trainingCenter.searchFormMethod }}</td>
+                </tr>
+                <tr>
+                    <th>Param&eacute;tre de recherche</th>
+                    <td>{{ trainingCenter.searchParameters }}</td>
+                </tr>
+                <tr>
+                    <th>Indexing fr&eacute;quence</th>
+                    <td>{{ trainingCenter.indexingFrequency }}</td>
+                </tr>
+                <tr>
+                    <th>Prix avec les taxes</th>
+                    <td>{{ trainingCenter.pricesIncludingTaxes }}</td>
+                </tr>
+                <tr>
+                    <th>logoFilePath</th>
+                    <td>{{ trainingCenter.logoFileBase64 }}</td>
+                </tr>
+
+                <tr>
+                    <th>Version (interne)</th>
+                    <td>{{ trainingCenter.version }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr></tr>
+                <th>Url</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lst of urlToCrawlLst">
+                    <td>{{ lst.url }}</td>
+                    <td>
+                        <a class="btn btn-info mr-2" [routerLink]="['/detailUrlToCrawl', lst.id]"><i class="far fa-edit"></i> Detail</a
+            >
+            <button
+              type="button"
+              (click)="crawl(lst.id)"
+              class="btn btn-default"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Lancer le crawl"
+            >
+              <i class="fas fa-play"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noTc
+      ><span class="text-danger"
+        >Aucun centre de formation trouv&eacute;</span
+      ></ng-template
+    >
+    <a
+      [routerLink]="['/trainingCenter']"
+      routerLinkActive="router-link-active"
+      class="btn btn-primary"
+    >
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Retour à la liste
+    </a>
+    </div>
+</div>

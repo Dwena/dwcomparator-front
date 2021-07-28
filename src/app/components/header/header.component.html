@@ -1,0 +1,135 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#">DAWAN Comparator</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!--<li class="nav-item">
+                    <a class="nav-link" routerLink="#">Home <span class="sr-only">(Title)</span></a
+          >
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/allformations">All formation</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticate()">
+          <a class="nav-link" routerLink="#">Formation DAWAN</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticate()">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLinkActive]="['active']"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <p>Centre de formation</p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/trainingCenter"
+              >Liste training center</a
+            >
+            <a class="dropdown-item" routerLink="add-trainingcenter"
+              >Ajouter training center</a
+            >
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticate()">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLinkActive]="['active']"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <p>Indexed Pages</p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/indexedpage"
+              >Liste Indexed Page</a
+            >
+            <a class="dropdown-item" routerLink="#">Ajouter </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticate()">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLinkActive]="['active']"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <p>Url to Crawl</p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/crawler"
+              >Liste Url to Crawl</a
+            >
+            <a class="dropdown-item" routerLink="/addUrlToCrawl">Ajouter </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticate()">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLinkActive]="['active']"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <p>Crawler</p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/crawlers">Liste Crawler</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticate()">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLinkActive]="['active']"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <p>Users</p>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/userlist">Liste User</a>
+            <a class="dropdown-item" routerLink="/add-user">Ajouter User</a>
+          </div>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="!isAuthenticate()"
+          [routerLinkActive]="['active']"
+        >
+          <a class="nav-link" routerLink="/login-page" *ngIf="user == null"
+            ><i class="now-ui-icons users_single-02"></i>Login</a
+          >
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="isAuthenticate()"
+          [routerLinkActive]="['active']"
+        >
+          <a class="nav-item nav-link" (click)="logout()"
+            ><i class="fas fa-sign-out-alt"></i>D&eacute;connexion</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

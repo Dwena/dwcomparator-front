@@ -1,0 +1,30 @@
+
+<div class="container-fuild">
+    <div class="panel">        
+        <form [formGroup]="formTrainingCenter"  (ngSubmit)="launchCrawlerByTraingCenterOrURL()" class="m-3">
+            <div class="form-group">
+                <label for="selectCrawler" class="mt-3">Lancer un crawler via un training center</label><br/>
+                <select formControlName="trainingCenterSelect" id="selectCrawler" class="form-control mt-1" (ngModelChange)="onChangeTrainingCenter()">
+                    <option *ngFor="let trainingCentersForm of trainingCentersForms" [ngValue]="trainingCentersForm.id" required class="form-control"> {{ trainingCentersForm.name }} </option>
+                </select>
+            </div>
+            <!-- <div class="form-group">
+                <label for="selectCrawlerURL" class="mt-3">Lancer un crawler via un training center</label><br/>
+                <select formControlName="CrawlerURLSelect" id="selectCrawlerURL" class="form-control mt-1">
+                    <option *ngFor="let CrawlerURLForm of CrawlerURLForms" [ngValue]="CrawlerURLForm.id" required class="form-control"> {{ CrawlerURLForm.url }} </option>
+                </select>
+            </div> -->
+            <button class="btn btn-primary mr-2 mb-2 mt-1" type="submit" id="btnLaunchCrawl">Lancer le crawler</button>
+            <p class="text-danger mt-3">
+                {{error}}
+            </p>
+            <p class="text-success mt-3">
+                {{success}}
+            </p>
+            <p class="text-warning mt-3">
+                {{crawlerInProgress ? "Crawler en cours pour se centre de formation." : ""}}
+            </p>
+            <mat-spinner *ngIf="spinner"></mat-spinner>
+        </form>
+    </div>
+</div>

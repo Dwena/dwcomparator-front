@@ -1,0 +1,90 @@
+<div class="card card-default">
+  <div class="card-header">
+    <h3>Les urls crawler</h3>
+  </div>
+  <div>
+    <a class="btn btn-dark" [routerLink]="['/addUrlToCrawl']"
+      ><i class="far fa-edit"></i>Ajouter</a
+    >
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input
+          type="text"
+          id="search-expression"
+          formControlName="searchExpression"
+          placeholder="Nom ou url"
+          class="form-control"
+        />
+        <span class="input-group-prepend">
+          <button [disabled]="loading" class="btn btn-primary">
+            <i class="fa fa-search"></i> Rechercher
+          </button>
+        </span>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Training Center</th>
+          <th>Url</th>
+          <th>Full Url</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="lstUrls; else noUrl">
+        <tr
+          *ngFor="
+            let lst of lstUrls
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: currentPage,
+                    totalItems: totalItems
+                  }
+          "
+        >
+          <td>{{ lst.id }}</td>
+          <td>{{ lst.trainingCenter.baseSiteUrl }}</td>
+          <td>{{ lst.url }}</td>
+          <td>{{ lst.fullUrl }}</td>
+          <td>
+            <a
+              class="btn btn-info mr-2"
+              [routerLink]="['/editUrlToCrawl', lst.id]"
+              ><i class="far fa-edit"></i> Editer</a
+            >
+            <a class="btn btn-danger" (click)="onDeleteUrlToCrawl(lst)"
+              ><i class="far fa-trash-alt"></i> Supprimer</a
+            >
+            <button
+              type="button"
+              (click)="crawl(lst.id)"
+              class="btn btn-default"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Lancer le crawl"
+            >
+              <i class="fas fa-play"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noUrl
+      ><span class="text-danger"
+        >Aucun training center trouv&eacute;</span
+      ></ng-template
+    >
+    <pagination-controls
+      *ngIf="lstUrls"
+      (pageChange)="pageChanged($event)"
+      previousLabel="Pr&eacute;c&eacute;dent"
+      nextLabel="Suivant"
+    ></pagination-controls>
+  </div>
+</div>
