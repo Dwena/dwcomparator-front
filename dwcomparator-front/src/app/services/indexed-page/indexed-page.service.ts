@@ -62,13 +62,13 @@ export class IndexedPageService {
   countBy(published: number, httpParams: HttpParams) {
     const token = this.localStorageService.get('token').token;
     const headers = new HttpHeaders().set('Authorization', 'bearer ' + token);
-    return this.http.get<any>(`${environment.apiConfig.apiUrl}/api/indexedpages/count-by/${published}`, { params: httpParams, headers});
+    return this.http.get<any>(`${environment.apiConfig.apiUrl}/api/indexedpage/count-by/${published}`, { params: httpParams, headers});
     }
 
   searchBy(page: number, size: number, published: number, httpParams: HttpParams) {
     const token = this.localStorageService.get('token').token;
     const headers = new HttpHeaders().set('Authorization', 'bearer ' + token);
-    return this.http.get<any>(`${environment.apiConfig.apiUrl}/api/indexedpages/search-by/${published}/${page }/${size}`,
+    return this.http.get<any>(`${environment.apiConfig.apiUrl}/api/indexedpage/search-by/${published}/${page }/${size}`,
                                     { params: httpParams, headers });
     }
 }

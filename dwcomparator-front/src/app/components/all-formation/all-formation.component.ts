@@ -93,7 +93,7 @@ export class AllFormationComponent implements OnInit {
   }
 
   onGetAllFormation(){
-    this.allFormation = this._allFormationService.getByKeyword(this.currentPage, this.form.value.keyword);
+    this.allFormation = this._allFormationService.getByKeyword(this.currentPage, this.f.keyword.value);
   }
 
 
@@ -133,7 +133,7 @@ export class AllFormationComponent implements OnInit {
 
     onSubmit(): void {
     if (this.form.valid) {
-      this.allFormation = this._allFormationService.getByKeyword(this.currentPage, this.form.value.keyword);
+      this.allFormation = this._allFormationService.getByKeyword(this.currentPage, this.f.keyword.value);
       this.submitEM.emit(this.form.value);
     }
   }
